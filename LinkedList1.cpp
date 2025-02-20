@@ -48,6 +48,27 @@ void insertPosition(int pos, int n){
     temp->next = newNode;
 }
 
+void insertLast(int n){
+
+    Node* newNode = new Node;
+    newNode->data = n;
+    newNode->next = NULL;
+
+    if(head == NULL){
+        head = newNode;
+        return;
+    }
+
+    Node* temp = head;
+
+    while (temp->next != NULL)
+    {
+        temp = temp->next;
+    }
+
+    temp->next = newNode; 
+}
+
 int main(){
 
 
@@ -58,6 +79,10 @@ int main(){
 
     insertPosition(2,50);
     insertPosition(4,27);
+
+    insertLast(21);
+    insertLast(29);
+
 
     display(head);
 
