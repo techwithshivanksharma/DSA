@@ -52,7 +52,7 @@ void insertEnd(int n)
         }
 
         temp->next = newNode;
-        newNode->prev = NULL;
+        newNode->prev = temp;
     }
 }
 
@@ -98,6 +98,93 @@ void insertAtPos(int n, int pos)
     temp->next = newNode;
 }
 
+void deleteFirst()
+{
+
+    if (head == NULL)
+    {
+        cout << "Linked List is Empty: ";
+        return;
+    }
+
+    Node *temp = head;
+    head = head->next;
+    if (head != NULL)
+    {
+        head->prev = NULL;
+    }
+    delete temp;
+}
+
+void deleteLast()
+{
+
+    if (head == NULL)
+    {
+        cout << "Linked List is Empty: ";
+        return;
+    }
+
+    Node *temp = head;
+
+    while (temp->next != NULL)
+    {
+        temp = temp->next;
+    }
+
+    if (temp->prev != NULL)
+    {
+        temp->prev->next = NULL;
+    }
+    else
+    {
+        head = NULL;
+    }
+    delete temp;
+}
+
+void deletePos(int pos)
+{
+
+    if (head == NULL)
+    {
+        cout << "Linked List is Empty: ";
+        return;
+    }
+
+    Node *temp = head;
+
+    if (pos == 1)
+    {
+        head = head->next;
+        if (head != NULL)
+        {
+            head->prev = NULL;
+        }
+        delete temp;
+        return;
+    }
+
+    for (int i = 1; i < pos && temp != NULL; i++)
+    {
+        temp = temp->next;
+    }
+    if (temp == NULL)
+    {
+        cout << "Please enter a valid position: ";
+        return;
+    }
+    if (temp->next != NULL)
+    {
+        temp->next->prev = temp->prev;
+    }
+    if (temp->prev != NULL)
+    {
+        temp->prev->next = temp->next;
+    }
+    delete temp;
+}
+
 void display()
 {
     Node *temp = head;
@@ -127,6 +214,9 @@ int main()
     insertAtPos(24, 6);
     insertAtPos(27, 3);
     insertAtPos(29, 1);
+
+    // deleteFirst();
+    // deleteLast();
 
     display();
 
